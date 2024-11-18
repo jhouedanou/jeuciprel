@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen bg-slate-50">
-        <header class="bg-white shadow-sm p-4 mb-8">
+        <header class="bg-white shadow-sm p-4 mb-8 fixed">
             <div class="container mx-auto flex justify-between items-center">
                 <h1 class="text-2xl font-bold text-blue-600">Circuit des turbines à Gaz</h1>
                 <div class="flex items-center gap-4">
