@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid" v-if="circuitData && circuitData.elements">
         <div class="row">
             <!-- Colonne des composants à glisser -->
             <div class="col-md-2">
@@ -53,6 +53,7 @@ const selectedItem = ref(null)
 const score = ref(0)
 
 const shuffledElements = computed(() => {
+    if (!circuitData.value?.elements) return []
     return [...circuitData.value.elements].sort(() => Math.random() - 0.5)
 })
 
