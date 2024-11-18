@@ -7,10 +7,25 @@ export default defineNuxtConfig({
     strict: false
   },
 
-  // modules: [
-  //   '@nuxtjs/pwa',
-  //   // ... other modules
-  // ],
+  modules: [
+    '@nuxt/image',
+    ['vue-toastification/nuxt', {
+      timeout: 2000,
+      draggable: false
+    }]
+  ],
+  image: {
+    quality: 80,
+    format: ['webp', 'jpg']
+  },
+  ssr: true,
+  nitro: {
+    preset: 'vercel',
+    prerender: {
+      // crawlLinks: true,
+      failOnError: false
+    },
+  }, 
   buildModules: [
     '@nuxtjs/pwa',
   ],
@@ -87,10 +102,5 @@ export default defineNuxtConfig({
     ]
   },
 
-  modules: ['@nuxt/image',  'vue-toastification/nuxt'],
-  
-  toastification: {
-    timeout: 2000,
-    draggable: false,
-  }
+
 })
