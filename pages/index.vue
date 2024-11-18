@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const router = useRouter();
-const navigateToTurbine = () => router.push('/jeu-turbines');
-const navigateToCycle = () => router.push('/jeu-cycle-combine');
+const pageTransition = {
+    name: 'page',
+    mode: 'out-in'
+}
 </script>
 
 <template>
@@ -11,26 +12,30 @@ const navigateToCycle = () => router.push('/jeu-cycle-combine');
                 <h1 class="display-4">Sélectionnez votre type d'installation</h1>
             </div>
             <div class="col-md-6">
-                <div class="card h-100" @click="navigateToTurbine">
-                    <div class="card-body text-center">
-                        <h2 class="card-title">Circuit de turbine à gaz</h2>
-                        <nuxt-img src="images/turbine.webp" format="webp" quality="80" class="img-fluid mb-3"
-                            alt="Turbine à gaz"></nuxt-img>
-                        <p class="card-text">Analyse et simulation de circuit de turbine à gaz</p>
-                        <button class="btn btn-primary">Sélectionner</button>
+                <nuxt-link to="/jeu-turbines" class="text-decoration-none">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h2 class="card-title">Circuit de turbine à gaz</h2>
+                            <nuxt-img src="images/turbine.webp" format="webp" quality="80" class="img-fluid mb-3"
+                                alt="Turbine à gaz"></nuxt-img>
+                            <p class="card-text">Analyse et simulation de circuit de turbine à gaz</p>
+                            <button class="btn btn-primary">Sélectionner</button>
+                        </div>
                     </div>
-                </div>
+                </nuxt-link>
             </div>
             <div class="col-md-6">
-                <div class="card h-100" @click="navigateToCycle">
-                    <div class="card-body text-center">
-                        <h2 class="card-title">Cycle combiné</h2>
-                        <nuxt-img src="images/cyclecombine.webp" format="webp" quality="80" class="img-fluid mb-3"
-                            alt="Cycle combiné"></nuxt-img>
-                        <p class="card-text">Analyse et simulation de cycle combiné</p>
-                        <button class="btn btn-primary">Sélectionner</button>
+                <nuxt-link to="/jeu-cycle-combine" class="text-decoration-none">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h2 class="card-title">Cycle combiné</h2>
+                            <nuxt-img src="images/cyclecombine.webp" format="webp" quality="80" class="img-fluid mb-3"
+                                alt="Cycle combiné"></nuxt-img>
+                            <p class="card-text">Analyse et simulation de cycle combiné</p>
+                            <button class="btn btn-primary">Sélectionner</button>
+                        </div>
                     </div>
-                </div>
+                </nuxt-link>
             </div>
         </div>
     </div>
@@ -50,5 +55,15 @@ const navigateToCycle = () => router.push('/jeu-cycle-combine');
 img {
     max-height: 200px;
     object-fit: cover;
+}
+
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 0.3s ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+    opacity: 0;
 }
 </style>

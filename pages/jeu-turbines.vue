@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen bg-slate-50">
-        <header class="bg-white shadow-sm p-4 mb-8 fixed">
+        <header class="bg-white shadow-sm p-4 mb-8 fixed w-full z-10">
             <div class="container mx-auto flex justify-between items-center">
                 <h1 class="text-2xl font-bold text-blue-600">Circuit des turbines à Gaz</h1>
                 <div class="flex items-center gap-4">
@@ -15,7 +15,7 @@
 
         <GameInstructions />
 
-        <main class="container mx-auto mt-8 grid grid-cols-12 gap-6">
+        <main class="container mx-auto mt-24 grid grid-cols-12 gap-6">
             <div class="col-span-3">
                 <div class="card">
                     <div class="card-header">
@@ -27,9 +27,14 @@
                                 :class="{ 'used': isItemUsed(item), 'pointer-events-none opacity-50': isGameOver }"
                                 :draggable="!isItemUsed(item) && !isGameOver" @dragstart="startDrag($event, item)">
                                 <div class="flex items-center gap-2">
-                                    <div class="component-image-container is-flex flex-wrap">
-                                        <nuxt-img :src="item.image" :alt="item.nom" width="120" height="120" fit="cover"
-                                            class="component-image" format="webp" quality="80" />
+                                    <div class="component-image-container is-flex flex-wrap relative">
+                                        <div v-if="imageLoading[item.nom]"
+                                            class="spinner absolute inset-0 flex items-center justify-center">
+                                            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600">
+                                            </div>
+                                        </div>
+                                        <img :src="item.image" :alt="item.nom" width="120" height="120"
+                                            class="component-image" />
                                     </div>
                                     <span class="font-medium">{{ item.nom }}</span>
                                 </div>
@@ -95,16 +100,16 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useCircuitTurbinesGaz } from '~/composables/useCircuitTurbinesGaz'
 import GameInstructions from '~/components/games/GameInstructions.vue'
-import { useToast } from 'vue-toastification'
 
-const toast = useToast()
+const { $swal } = useNuxtApp()
 const { circuitData } = useCircuitTurbinesGaz()
 const placedItems = ref({})
 const selectedItem = ref(null)
 const score = ref(0)
-const timeLeft = ref(120)
+const timeLeft = ref(60)
 const isGameOver = ref(false)
 const timer = ref(null)
+const imageLoading = ref({})
 
 const defaultCircuitData = {
     elements: []
@@ -138,7 +143,9 @@ const startTimer = () => {
 }
 
 const isItemUsed = (item) => {
-    return Object.values(placedItems.value).some(placedItem => placedItem.nom === item.nom)
+    // return Object.values(placedItems.value).some(placedItem => placedItem.nom === item.nom)
+    return false // Désactive la vérification, permettant de réutiliser les composants
+
 }
 
 const startDrag = (event, item) => {
@@ -170,115 +177,327 @@ const checkScore = () => {
     }, 0)
 
     if (score.value > previousScore) {
-        toast.success("Correct ! Bien joué !", {
-            timeout: 2000,
-            position: "top-right"
+        $swal.fire({
+            title: 'Correct !',
+            text: 'Bien joué !',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false,
+            toast: true
         })
     } else {
-        toast.error("Mauvais ordre, essayez encore !", {
-            timeout: 2000,
-            position: "top-right"
+        $swal.fire({
+            title: 'Attention',
+            text: 'Mauvais ordre, essayez encore !',
+            icon: 'error',
+            timer: 1500,
+            showConfirmButton: false,
+            toast: true
         })
     }
 
     if (score.value === safeCircuitData.value.elements.length) {
-        toast.success("Félicitations ! Vous avez complété le circuit parfaitement !", {
-            timeout: 3000,
-            position: "top-center"
+        $swal.fire({
+            title: 'Félicitations !',
+            text: 'Vous avez complété le circuit parfaitement !',
+            icon: 'success',
+            timer: 2500,
+            showConfirmButton: false,
+            toast: true
         })
     }
 }
 
 onMounted(() => {
     startTimer()
+    safeCircuitData.value.elements.forEach(item => {
+        imageLoading.value[item.nom] = true
+    })
 })
 
 onBeforeUnmount(() => {
     if (timer.value) clearInterval(timer.value)
-})
+});
 </script>
+
 
 <style lang="scss" scoped>
 .card {
-    @apply bg-white rounded-lg shadow-sm;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .card-header {
-    @apply p-4 border-b border-gray-200;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .card-title {
-    @apply text-xl font-semibold text-gray-800;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
 }
 
 .card-content {
-    @apply p-4;
+    padding: 1rem;
 }
 
 .components-list {
-    @apply space-y-4;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     border: 1px solid #ddd;
     padding: 10px;
     min-height: 400px;
 }
 
 .draggable-component {
-    @apply bg-blue-50 rounded p-3 cursor-move hover:bg-blue-100 transition-colors;
-}
+    background-color: #eff6ff;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    cursor: move;
+    transition: background-color 0.2s;
 
-.draggable-component.used {
-    @apply opacity-50 cursor-not-allowed bg-gray-100;
+    &:hover {
+        background-color: #dbeafe;
+    }
+
+    &.used {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: #f3f4f6;
+    }
 }
 
 .component-image-container {
-    @apply w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #dbeafe;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .component-image {
-    @apply w-8 h-8 object-cover rounded;
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    border-radius: 0.25rem;
     max-width: 100%;
     height: auto;
     margin-bottom: 5px;
 }
 
 .drop-zones {
-    @apply grid grid-cols-1 gap-4 min-h-[500px];
     display: flex;
     flex-direction: column;
     gap: 20px;
+    min-height: 500px;
 }
 
 .drop-zone {
-    @apply h-24 bg-gray-50 rounded-lg border-2 border-gray-200 flex items-center justify-center hover:border-blue-300 transition-colors;
+    height: 6rem;
+    background-color: #f9fafb;
     border: 2px dashed #ccc;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-height: 100px;
     padding: 10px;
+    transition: border-color 0.2s;
+
+    &:hover {
+        border-color: #93c5fd;
+    }
 }
 
 .empty-zone {
-    @apply text-gray-400;
-    color: #666;
+    color: #9ca3af;
 }
 
 .info-panel {
-    @apply bg-blue-50 p-4 rounded-lg;
+    background-color: #eff6ff;
+    padding: 1rem;
+    border-radius: 0.5rem;
     border: 1px solid #ddd;
-    padding: 15px;
     min-height: 400px;
 }
 
 .placed-item {
-    @apply w-full h-full flex flex-col items-center justify-center;
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-}
 
-.placed-item img {
-    @apply max-w-[120px] h-auto;
-    max-width: 200px;
+    img {
+        max-width: 120px;
+        height: auto;
+    }
 }
 
 .backdrop-blur-sm {
     backdrop-filter: blur(4px);
+}
+
+:global(.swal2-container) {
+    position: fixed;
+    top: 20px !important;
+    right: 20px !important;
+    left: auto !important;
+    bottom: auto !important;
+    padding: 0;
+}
+
+:global(.swal2-popup) {
+    width: 300px;
+    margin: 0;
+    padding: 1rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    border-radius: 1rem;
+}
+
+:global(.swal2-title) {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #2563eb;
+    font-weight: 700;
+}
+
+:global(.swal2-html-container) {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #374151;
+}
+
+.swal2-icon.swal2-success {
+    border-color: #4CAF50;
+}
+
+.swal2-icon.swal2-error {
+    border-color: #FF5252;
+}
+
+.swal2-container {
+    padding: 1rem;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.swal2-show {
+    animation: fadeInDown 0.3s;
+}
+
+.swal2-hide {
+    animation: fadeOutUp 0.2s;
+}
+
+.placed-item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    img {
+        max-width: 120px;
+        height: auto;
+    }
+}
+
+.backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+}
+
+/* Styles pour SweetAlert2 */
+:global(.swal2-popup) {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 1rem;
+    width: auto;
+    max-width: 400px;
+    padding: 1.5rem;
+}
+
+:global(.swal2-title) {
+    color: #2563eb;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+:global(.swal2-html-container) {
+    color: #374151;
+}
+
+:global(.swal2-icon.swal2-success) {
+    border-color: #4CAF50;
+}
+
+:global(.swal2-icon.swal2-error) {
+    border-color: #FF5252;
+}
+
+:global(.swal2-container) {
+    padding: 1rem;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+:global(.swal2-show) {
+    animation: fadeInDown 0.3s;
+}
+
+:global(.swal2-hide) {
+    animation: fadeOutUp 0.2s;
 }
 </style>

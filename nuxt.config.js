@@ -6,14 +6,17 @@ export default defineNuxtConfig({
   typescript: {
     strict: false
   },
+modules: [
+  '@nuxt/image',
+],
+plugins: [
+  '~/plugins/sweetalert2.js'
+],
+css: [
+  '@sweetalert2/theme-minimal/minimal.css',
+  '@/assets/styles/styles.scss'
 
-  modules: [
-    '@nuxt/image',
-    ['vue-toastification/nuxt', {
-      timeout: 2000,
-      draggable: false
-    }]
-  ],
+],
   image: {
     quality: 80,
     format: ['webp', 'jpg']
@@ -71,11 +74,10 @@ export default defineNuxtConfig({
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Material+Icons&display=swap'
-      },
+      }, 
       {
         rel: 'stylesheet',
-         href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'
-
+        href: 'https://cdn.jsdelivr.net/npm/@sweetalert2/theme-minimal@5/minimal.css'
       },
       { rel: 'apple-touch-icon', sizes: '57x57', href: '/images/apple-icon-57x57.png' },
       { rel: 'apple-touch-icon', sizes: '60x60', href: '/images/apple-icon-60x60.png' },
@@ -97,9 +99,6 @@ export default defineNuxtConfig({
       { name: 'msapplication-TileImage', content: '/images/ms-icon-144x144.png' },
       { name: 'theme-color', content: '#ffffff' },
     ],
-    plugins: [
-      { src: '~/plugins/swiper.js', mode: 'client' }
-    ]
   },
 
 
