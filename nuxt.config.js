@@ -87,5 +87,10 @@ export default defineNuxtConfig({
     ]
   },
 
-  modules: ['@nuxt/image']
+  modules: ['@nuxt/image',  'vue-toastification/nuxt'],
+  
+  toastification: {
+    timeout: 2000,
+    draggable: false,
+  }
 })
