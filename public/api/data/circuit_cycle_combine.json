@@ -1,0 +1,32 @@
+{
+    "circuit_cycle_combine": {
+        "objectif": "Récupérer la chaleur des gaz d’échappement pour produire de l’électricité supplémentaire.",
+        "elements": [
+            {
+                "nom": "Chaudière de Récupération de Chaleur",
+                "fonction": "Capte la chaleur des gaz d’échappement pour générer de la vapeur.",
+                "position": "Premier"
+            },
+            {
+                "nom": "Turbine à Vapeur",
+                "fonction": "La vapeur générée fait tourner cette turbine pour produire de l’énergie mécanique supplémentaire.",
+                "position": "Après la chaudière de récupération"
+            },
+            {
+                "nom": "Générateur",
+                "fonction": "Convertit l’énergie mécanique de la turbine à vapeur en électricité.",
+                "position": "Après la turbine à vapeur"
+            },
+            {
+                "nom": "Condenseur",
+                "fonction": "Condense la vapeur résiduelle après son passage dans la turbine, pour récupérer l’eau.",
+                "position": "Après le générateur"
+            },
+            {
+                "nom": "Pompe d’Alimentation en Eau",
+                "fonction": "Ramène l’eau condensée vers la chaudière de récupération pour créer un cycle fermé.",
+                "position": "Dernier"
+            }
+        ]
+    }
+}

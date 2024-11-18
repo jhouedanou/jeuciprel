@@ -1,0 +1,37 @@
+{
+    "circuit_turbines_gaz": {
+        "objectif": "Utiliser le gaz naturel pour faire tourner une turbine et générer de l’électricité directement.",
+        "elements": [
+            {
+                "nom": "Compresseur",
+                "fonction": "Augmente la pression de l’air avant qu’il entre dans la chambre de combustion.",
+                "position": "Premier"
+            },
+            {
+                "nom": "Chambre de Combustion",
+                "fonction": "Mélange l’air comprimé avec le gaz naturel et déclenche la combustion.",
+                "position": "Après le compresseur"
+            },
+            {
+                "nom": "Combustion",
+                "fonction": "Permet de produire les gaz chauds pour faire tourner la turbine.",
+                "position": "Dans la chambre de combustion"
+            },
+            {
+                "nom": "Turbine à Gaz",
+                "fonction": "La combustion du gaz fait tourner les ailettes de la turbine, ce qui génère de l’énergie mécanique.",
+                "position": "Après la chambre de combustion"
+            },
+            {
+                "nom": "Générateur",
+                "fonction": "Convertit l’énergie mécanique produite par la turbine en électricité.",
+                "position": "Après la turbine"
+            },
+            {
+                "nom": "Évacuateur des Gaz d’Échappement",
+                "fonction": "Libère les gaz brûlés dans l’atmosphère ou les envoie vers le cycle combiné pour récupération de chaleur.",
+                "position": "Dernier"
+            }
+        ]
+    }
+}

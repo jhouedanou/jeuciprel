@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const router = useRouter();
-const navigateToTurbine = () => router.push('/turbine');
-const navigateToCycle = () => router.push('/cycle-combine');
+const navigateToTurbine = () => router.push('/jeu-turbines');
+const navigateToCycle = () => router.push('/jeu-cycle-combine');
 </script>
 
 <template>
@@ -16,7 +16,6 @@ const navigateToCycle = () => router.push('/cycle-combine');
                         <h2 class="card-title">Circuit de turbine à gaz</h2>
                         <nuxt-img src="images/turbine.webp" format="webp" quality="80" class="img-fluid mb-3"
                             alt="Turbine à gaz"></nuxt-img>
-
                         <p class="card-text">Analyse et simulation de circuit de turbine à gaz</p>
                         <button class="btn btn-primary">Sélectionner</button>
                     </div>
