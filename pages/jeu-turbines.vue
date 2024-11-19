@@ -52,7 +52,7 @@
                 <div class="column is-5-desktop is-8-mobile">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-title">Zone de construction</h2>
+                            <h2 class="card-title">Turbines à Gaz</h2>
                         </div>
                         <div class="card-content">
                             <div class="drop-zones">
