@@ -9,15 +9,7 @@
                     <div class="column is-8 cassie is-flex is-justify-content-end p-0">
                         <div class="insidelogowrapper">
                             <h5 class="text-2xl font-bold text-blue-600">Circuit des turbines à Gaz</h5>
-                            <div class="is-flex items-center gap-4">
-                                <div class="khan is-flex is-align-items-end is-flex-direction-column">
-                                    <span class="font-semibold">votre score: {{ score }}/{{
-                                        safeCircuitData.elements.length
-                                        }}</span>
-                                    <span class="font-semibold ml-4">Temps restant: <strong>{{ timeLeft
-                                            }}s</strong></span>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -56,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="column is-6">
+                <div class="column is-5">
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">Zone de construction</h2>
@@ -86,16 +78,42 @@
                     </div>
                 </div>
 
-                <div class="column is-2">
+                <div class="column is-3">
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">Information</h2>
                         </div>
                         <div class="card-content">
-                            <div v-if="selectedItem" class="info-panel">
+                            <!-- <div v-if="selectedItem" class="info-panel">
                                 <h3 class="font-medium text-blue-800">{{ selectedItem.nom }}</h3>
                                 <p class="text-sm text-blue-600 mt-1">{{ selectedItem.fonction }}</p>
+                            </div> -->
+                            <div class="chronograph absolute top-4 right-4 z-50">
+                                <svg class="progress-ring" width="60" height="60">
+                                    <circle class="progress-ring__circle" :style="{
+                                        strokeDashoffset: `${calculateOffset()}px`,
+                                        stroke: timeLeft <= 10 ? '#dc2626' : '#16a34a'
+                                    }" stroke-width="4" fill="transparent" r="26" cx="30" cy="30" />
+                                </svg>
+                                <div class="chronograph-text" :class="{ 'text-red-600': timeLeft <= 10 }">
+                                    {{ timeLeft }} <p>secondes</p>
+                                </div>
                             </div>
+                            <div class="flex items-center gap-4">
+                                <div class="flex items-center gap-2">
+                                    <p class="font-semibold" :class="{
+                                        'score-text red': score < 3,
+                                        'score-text orange': score >= 3 && score < 4,
+                                        'score-text green': score >= 4
+                                    }">
+                                        votre score: {{ score }}/{{ safeCircuitData.elements.length }}
+                                    </p>
+                                    <p class="font-semibold" :class="{ 'score-text red': timeLeft <= 10 }">
+                                        Temps restant: {{ timeLeft }}s
+                                    </p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -106,7 +124,6 @@
         <div v-if="isGameOver"
             class="gameOver fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
             <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
-                <img src="/images/logo.webp" alt="">
                 <h2 class="text-2xl font-bold mb-4">Temps écoulé !</h2>
                 <p class="text-lg mb-2">Votre score final est : {{ score }}/{{ safeCircuitData.elements.length }}</p>
                 <p class="text-md text-blue-600 mb-4">{{ getFinalEvaluation }}</p>
@@ -134,6 +151,11 @@ const isGameOver = ref(false)
 const timer = ref(null)
 const imageLoading = ref({})
 
+const calculateOffset = () => {
+    const circumference = 2 * Math.PI * 26;
+    const progress = (timeLeft.value / 60) * circumference;
+    return circumference - progress;
+}
 const defaultCircuitData = {
     elements: []
 }

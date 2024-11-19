@@ -360,3 +360,58 @@ body,
         opacity  : 1;
     }
 }
+
+.info-panel {
+    h3 {
+        font-size: 1em !important;
+    }
+}
+
+.score-text {
+    font-weight: 600;
+}
+
+.score-text.red {
+    color: #dc2626;
+    /* red-600 */
+}
+
+.score-text.orange {
+    color: #f97316;
+    /* orange-500 */
+}
+
+.score-text.green {
+    color: #16a34a;
+    /* green-600 */
+}
+
+.countdown-text {
+    font-weight: 600;
+    margin-left: 1rem;
+}
+
+.countdown-text.warning {
+    color: #dc2626;
+    /* red-600 */
+}
+
+.chronograph {
+    position       : absolute;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
+.progress-ring__circle {
+    transition      : stroke-dashoffset 0.35s;
+    transform       : rotate(-90deg);
+    transform-origin: 50% 50%;
+    stroke-dasharray: 163.36281798666926;
+}
+
+.chronograph-text {
+    position   : absolute;
+    font-weight: bold;
+    font-size  : 1.2rem;
+}
