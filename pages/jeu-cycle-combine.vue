@@ -14,9 +14,7 @@
                         <div class="card-content">
                             <div class="components-list">
 
-                                <NuxtLink to="/">
-                                    <img src="/images/logo.webp" alt="Logo" class="h-10" style="height:60px;" />
-                                </NuxtLink>
+
                                 <div v-for="item in shuffledElements" :key="item.nom" class="draggable-component"
                                     :class="{ 'used': isItemUsed(item), 'pointer-events-none opacity-50': isGameOver }"
                                     :draggable="!isItemUsed(item) && !isGameOver" @dragstart="startDrag($event, item)"
