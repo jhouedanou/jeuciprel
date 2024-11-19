@@ -6,7 +6,7 @@ const pageTransition = {
 </script>
 <template>
     <div
-        class="min-h-screen bg-[#f0f7ff] is-flex is-justify-content-center is-flex-direction-column is-align-items-center">
+        class="home min-h-screen bg-[#f0f7ff] is-flex is-justify-content-center is-flex-direction-column is-align-items-center">
 
 
         <main
@@ -15,11 +15,11 @@ const pageTransition = {
                 <h1 class="text-4xl font-bold text-[#1a237e] mb-4">Nos installations</h1>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 didq">
                 <nuxt-link to="/jeu-turbines" class="text-decoration-none">
                     <div class="card hover:transform hover:scale-105 transition-all duration-300">
                         <div class="p-6 text-center">
-                            <h2 class="text-2xl font-bold text-[#1a237e] mb-4">Circuit de turbine à gaz</h2>
+                            <h2 class="text-2xl font-bold text-[#1a237e] mb-4">Turbines à gaz</h2>
                             <nuxt-img src="images/turbine.webp" format="webp" quality="80"
                                 class="mx-auto mb-6 rounded-lg shadow-lg" alt="Turbine à gaz" />
                             <p class="card-text">

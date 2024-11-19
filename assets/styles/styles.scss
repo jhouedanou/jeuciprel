@@ -486,7 +486,51 @@ body,
     width  : 100% !important;
 }
 
+.home {
+    .btn-primary {
+
+        background-color: $primary !important;
+        font-weight     : bold !important;
+        border          : none !important
+    }
+}
+
 @media screen and (max-width: 1024px) {
+
+    .swal2-container.swal2-center.swal2-backdrop-show {
+        left     : 0vh !important;
+        bottom   : 10vh !important;
+        max-width: 120px !important;
+    }
+
+    .drop-zone {
+        height    : auto !important;
+        overflow  : auto;
+        min-height: 6rem !important;
+    }
+
+    .home {
+
+        h1,
+        h2 {
+            font-size: 1em !important;
+        }
+
+        .card-text {
+            font-size  : 12px !important;
+            line-height: 1.5 !important;
+        }
+
+        .btn-primary {
+
+            background-color: $primary !important;
+            font-weight     : bold !important;
+            border          : none !important
+        }
+    }
+
+
+
     .obama {
         h3 {
             font-size: 11px !important;
@@ -550,4 +594,22 @@ body,
 
 body {
     min-height: 100vh;
+}
+
+.didq {
+    .card {
+        .p-6 {
+            padding: 10px !important;
+
+            img {
+                border: 10px white solid !important;
+
+                border-radius        : 100%;
+                -webkit-border-radius: 100%;
+                -moz-border-radius   : 100%;
+                -ms-border-radius    : 100%;
+                -o-border-radius     : 100%;
+            }
+        }
+    }
 }

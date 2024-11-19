@@ -302,6 +302,9 @@ const checkScore = () => {
             }
         })
     }
+
+    //vérifier si toutes les zones sont remplies
+
 }
 
 onMounted(() => {
