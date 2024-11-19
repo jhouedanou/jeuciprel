@@ -12,7 +12,7 @@ const pageTransition = {
         <main
             class="container mx-auto px-4 pt-24 is-flex is-justify-content-center is-flex-direction-column is-align-items-center">
             <div class="text-center mb-12">
-                <h1 class="text-4xl font-bold text-[#1a237e] mb-4">Nos installations</h1>
+                <h1 id="lestyle" class="text-4xl font-bold text-[#1a237e] mb-4">Nos installations</h1>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 didq">

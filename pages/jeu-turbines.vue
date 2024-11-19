@@ -104,9 +104,8 @@
                     </div>
                     <div class="nichiren">
                         <button @click="$router.push('/')"
-                            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center">
-                            <span class="material-icons mr-2">home</span>
-                            Accueil
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center btn btn-primary">
+                            Retour à l'accueil
                         </button>
                     </div>
                 </div>
