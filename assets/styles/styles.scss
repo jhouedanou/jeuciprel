@@ -510,7 +510,44 @@ body,
     }
 }
 
+@media screen and (min-width: 1024px) {
+    .instructions-mobile {
+        display        : none !important;
+        width          : 100% !important;
+        justify-content: center !important;
+        flex-direction : column !important;
+        align-items    : center !important;
+        text-align     : center !important;
+    }
+
+    .instructions {
+        display        : flex !important;
+        width          : 100% !important;
+        justify-content: center !important;
+        flex-direction : column !important;
+        align-items    : center !important;
+        text-align     : center !important;
+    }
+}
+
 @media screen and (max-width: 1024px) {
+    .instructions-mobile {
+        display        : flex !important;
+        width          : 100% !important;
+        justify-content: center !important;
+        flex-direction : column !important;
+        align-items    : center !important;
+        text-align     : center !important;
+    }
+
+    .instructions {
+        display        : none !important;
+        width          : 100% !important;
+        justify-content: center !important;
+        flex-direction : column !important;
+        align-items    : center !important;
+        text-align     : center !important;
+    }
 
     .swal2-container.swal2-center.swal2-backdrop-show {
         left     : 0vh !important;

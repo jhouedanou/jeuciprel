@@ -3,6 +3,7 @@
         <div class="instruction-modal">
             <h2 class="text-center mb-4">Comment jouer ?</h2>
 
+            <!-- Instructions Desktop -->
             <div class="instructions">
                 <div class="instruction-step">
                     <i class="fas fa-arrows-alt"></i>
@@ -13,11 +14,20 @@
                     <i class="fas fa-sort-numeric-down"></i>
                     <p>Placez-les dans l'ordre correct au centre</p>
                 </div>
+            </div>
+
+            <!-- Instructions Mobile -->
+            <div class="instructions-mobile">
+                <div class="instruction-step">
+                    <i class="fas fa-hand-pointer"></i>
+                    <p>Touchez un composant</p>
+                </div>
 
                 <div class="instruction-step">
-                    <i class="fas fa-check-circle"></i>
-                    <p>Validez votre circuit une fois terminé</p>
+                    <i class="fas fa-arrows-alt"></i>
+                    <p>Cliquez sur la position concernée pour le déplacer vers la zone souhaitée</p>
                 </div>
+
             </div>
 
             <button @click="startGame" class="start-button">
@@ -26,6 +36,7 @@
         </div>
     </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue'
