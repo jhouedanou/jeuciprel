@@ -16,7 +16,7 @@
             </div>
         </header>
 
-        <GameInstructions />
+        <GameInstructions @start-game="startGame" />
         <div class="game-container container">
             <main class="columns">
                 <div class="column is-4">
@@ -88,17 +88,7 @@
                                 <h3 class="font-medium text-blue-800">{{ selectedItem.nom }}</h3>
                                 <p class="text-sm text-blue-600 mt-1">{{ selectedItem.fonction }}</p>
                             </div> -->
-                            <div class="chronograph absolute top-4 right-4 z-50">
-                                <svg class="progress-ring" width="60" height="60">
-                                    <circle class="progress-ring__circle" :style="{
-                                        strokeDashoffset: `${calculateOffset()}px`,
-                                        stroke: timeLeft <= 10 ? '#dc2626' : '#16a34a'
-                                    }" stroke-width="4" fill="transparent" r="26" cx="30" cy="30" />
-                                </svg>
-                                <div class="chronograph-text" :class="{ 'text-red-600': timeLeft <= 10 }">
-                                    {{ timeLeft }} <p>secondes</p>
-                                </div>
-                            </div>
+
                             <div class="flex items-center gap-4">
                                 <div class="flex items-center gap-2">
                                     <p class="font-semibold" :class="{
@@ -108,6 +98,17 @@
                                     }">
                                         votre score: {{ score }}/{{ safeCircuitData.elements.length }}
                                     </p>
+                                    <div class="chronograph z-50">
+                                        <svg class="progress-ring" width="60" height="60">
+                                            <circle class="progress-ring__circle" :style="{
+                                                strokeDashoffset: `${calculateOffset()}px`,
+                                                stroke: timeLeft <= 10 ? '#dc2626' : '#16a34a'
+                                            }" stroke-width="4" fill="transparent" r="26" cx="30" cy="30" />
+                                        </svg>
+                                        <div class="chronograph-text" :class="{ 'text-red-600': timeLeft <= 10 }">
+                                            {{ timeLeft }} <p>secondes</p>
+                                        </div>
+                                    </div>
                                     <p class="font-semibold" :class="{ 'score-text red': timeLeft <= 10 }">
                                         Temps restant: {{ timeLeft }}s
                                     </p>
@@ -150,7 +151,11 @@ const timeLeft = ref(60)
 const isGameOver = ref(false)
 const timer = ref(null)
 const imageLoading = ref({})
-
+const timerStarted = ref(false)
+const startGame = () => {
+    timerStarted.value = true
+    startTimer()
+}
 const calculateOffset = () => {
     const circumference = 2 * Math.PI * 26;
     const progress = (timeLeft.value / 60) * circumference;
@@ -263,7 +268,7 @@ const checkScore = () => {
 }
 
 onMounted(() => {
-    startTimer()
+    //startTimer()
     safeCircuitData.value.elements.forEach(item => {
         imageLoading.value[item.nom] = true
     })

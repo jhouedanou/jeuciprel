@@ -31,10 +31,13 @@
 import { ref } from 'vue'
 
 const isVisible = ref(true)
+const emit = defineEmits(['start-game'])
 
 const startGame = () => {
     isVisible.value = false
-}
+
+    emit('start-game')
+};
 </script>
 
 <style scoped>
