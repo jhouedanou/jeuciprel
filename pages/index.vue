@@ -5,25 +5,14 @@ const pageTransition = {
 }
 </script>
 <template>
-    <div class="min-h-screen bg-[#f0f7ff]">
-        <header class="bg-white shadow-sm p-4 sticky top-0 z-50 transition-all duration-200">
-            <div class="container mx-auto flex justify-between items-center">
-                <div class="columns">
-                    <div class="column is-4">
-                        <img src="/images/logo.webp" alt="Logo" class="h-20" />
-                    </div>
-                    <div class="column is-8 is-flex is-justify-content-end">
-                        <div class="insidelogowrapper">
-                            <h5 class="text-2xl font-bold text-[#FF5722]">Simulateur CIPREL</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <div
+        class="min-h-screen bg-[#f0f7ff] is-flex is-justify-content-center is-flex-direction-column is-align-items-center">
 
-        <main class="container mx-auto px-4 pt-24">
+
+        <main
+            class="container mx-auto px-4 pt-24 is-flex is-justify-content-center is-flex-direction-column is-align-items-center">
             <div class="text-center mb-12">
-                <h1 class="text-4xl font-bold text-[#1a237e] mb-4">Sélectionnez votre type d'installation</h1>
+                <h1 class="text-4xl font-bold text-[#1a237e] mb-4">Nos installations</h1>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -49,9 +38,9 @@ const pageTransition = {
                             <h2 class="text-2xl font-bold text-[#1a237e] mb-4">Cycle combiné</h2>
                             <nuxt-img src="images/cyclecombine.webp" format="webp" quality="80"
                                 class="mx-auto mb-6 rounded-lg shadow-lg" alt="Cycle combiné" />
-                            < <p class="card-text">Notre centrale thermique à cycle combiné permet d’éviter le rejet de
+                            <p class="card-text">Notre centrale thermique à cycle combiné permet d’éviter le rejet de
                                 près de 500 000 tonnes de CO2 dans l’atmosphère de la Côte d’Ivoire.</p>
-                                <button class="btn btn-primary">Sélectionner</button>
+                            <button class="btn btn-primary">Sélectionner</button>
                         </div>
                     </div>
                 </nuxt-link>

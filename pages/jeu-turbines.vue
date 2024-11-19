@@ -1,30 +1,21 @@
 <template>
     <div class="min-h-screen bg-slate-50">
-        <header class="bg-white shadow-sm p-4 sticky fixed top-0 z-50 transition-all duration-200 dss">
-            <div class="container mx-auto flex justify-between items-center logowrapper">
-                <div class="columns">
-                    <div class="column is-4-desktop is-4-mobile rihanna">
-                        <img src="/images/logo.webp" alt="Logo" class="h-10" style="height:80px;" />
-                    </div>
-                    <div class="column is-8-desktop is-8-mobile cassie is-flex is-justify-content-end p-0">
-                        <div class="insidelogowrapper">
-                            <h5 class="text-2xl font-bold text-blue-600">Circuit des turbines à Gaz</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
 
         <GameInstructions @start-game="startGame" />
         <div class="game-container container">
             <main class="columns is-mobile">
-                <div class="column is-4-desktop is-4-mobile">
+                <div id="lescomposants" class="column is-4-desktop is-5-mobile">
+
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">Composants</h2>
+
                         </div>
                         <div class="card-content">
                             <div class="components-list">
+                                <NuxtLink to="/">
+                                    <img src="/images/logo.webp" alt="Logo" class="h-10" style="height:60px;" />
+                                </NuxtLink>
                                 <div v-for="item in shuffledElements" :key="item.nom" class="draggable-component"
                                     :class="{ 'used': isItemUsed(item), 'pointer-events-none opacity-50': isGameOver }"
                                     :draggable="!isItemUsed(item) && !isGameOver" @dragstart="startDrag($event, item)"
@@ -45,11 +36,45 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="jano" class="jano column is-3-desktop is-12-mobile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h2 class="card-title">Information</h2>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="flex items-center gap-4">
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-semibold" :class="{
+                                                    'score-text red': score < 3,
+                                                    'score-text orange': score >= 3 && score < 4,
+                                                    'score-text green': score >= 4
+                                                }">
+                                                    votre score: {{ score }}/{{ safeCircuitData.elements.length }}
+                                                </p>
+                                                <div class="chronograph z-50" v-if="timerStarted">
+                                                    <svg class="progress-ring" width="60" height="60">
+                                                        <circle class="progress-ring__circle" :style="{
+                                                            strokeDashoffset: `${calculateOffset()}px`,
+                                                            stroke: timeLeft <= 10 ? '#dc2626' : '#16a34a'
+                                                        }" stroke-width="4" fill="transparent" r="26" cx="30"
+                                                            cy="30" />
+                                                    </svg>
+                                                    <div class="chronograph-text"
+                                                        :class="{ 'text-red-600': timeLeft <= 10 }">
+                                                        {{ timeLeft }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
-                <div class="column is-5-desktop is-8-mobile">
+                <div class="column is-8-desktop is-7-mobile">
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">Turbines à Gaz</h2>
@@ -75,40 +100,18 @@
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="nichiren">
+                        <button @click="$router.push('/')"
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+                            <span class="material-icons mr-2">home</span>
+                            Accueil
+                        </button>
                     </div>
                 </div>
 
-                <div class="column is-3-desktop is-12-mobile">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">Information</h2>
-                        </div>
-                        <div class="card-content">
-                            <div class="flex items-center gap-4">
-                                <div class="flex items-center gap-2">
-                                    <p class="font-semibold" :class="{
-                                        'score-text red': score < 3,
-                                        'score-text orange': score >= 3 && score < 4,
-                                        'score-text green': score >= 4
-                                    }">
-                                        votre score: {{ score }}/{{ safeCircuitData.elements.length }}
-                                    </p>
-                                    <div class="chronograph z-50" v-if="timerStarted">
-                                        <svg class="progress-ring" width="60" height="60">
-                                            <circle class="progress-ring__circle" :style="{
-                                                strokeDashoffset: `${calculateOffset()}px`,
-                                                stroke: timeLeft <= 10 ? '#dc2626' : '#16a34a'
-                                            }" stroke-width="4" fill="transparent" r="26" cx="30" cy="30" />
-                                        </svg>
-                                        <div class="chronograph-text" :class="{ 'text-red-600': timeLeft <= 10 }">
-                                            {{ timeLeft }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </main>
         </div>
 
@@ -123,6 +126,8 @@
                 </button>
             </div>
         </div>
+
+
     </div>
 </template>
 
@@ -141,7 +146,15 @@ const isGameOver = ref(false)
 const timer = ref(null)
 const imageLoading = ref({})
 const timerStarted = ref(false)
+const updateJanoWidth = () => {
+    const composantsDiv = document.getElementById('lescomposants')
+    const janoDiv = document.getElementById('jano')
 
+    if (composantsDiv && janoDiv) {
+        const width = composantsDiv.offsetWidth
+        janoDiv.style.width = `${width}px`
+    }
+}
 const calculateOffset = () => {
     const circumference = 2 * Math.PI * 26
     const progress = (timeLeft.value / 60) * circumference
@@ -255,7 +268,7 @@ const checkScore = () => {
             title: 'Correct !',
             text: 'Bien joué !',
             icon: 'success',
-            timer: 800,
+            timer: 2000,
             showConfirmButton: false,
             toast: true,
             customClass: {
@@ -267,7 +280,7 @@ const checkScore = () => {
             title: 'Attention',
             text: 'Mauvais ordre, essayez encore !',
             icon: 'error',
-            timer: 800,
+            timer: 2000,
             showConfirmButton: false,
             toast: true,
             customClass: {
@@ -281,7 +294,7 @@ const checkScore = () => {
             title: 'Félicitations !',
             text: 'Vous avez complété le circuit parfaitement !',
             icon: 'success',
-            timer: 1200,
+            timer: 2000,
             showConfirmButton: false,
             toast: true,
             customClass: {
@@ -295,10 +308,15 @@ onMounted(() => {
     safeCircuitData.value.elements.forEach(item => {
         imageLoading.value[item.nom] = true
     })
+    //updateJanoWidth()
+    //window.addEventListener('resize', updateJanoWidth)
+
 })
 
 onBeforeUnmount(() => {
     if (timer.value) clearInterval(timer.value)
+    //window.removeEventListener('resize', updateJanoWidth)
+
 });
 </script>
 

@@ -5,6 +5,8 @@ export const useCircuitCycleCombine = () => {
     try {
       const response = await fetch('/api/data/circuit_cycle_combine.json')
       const data = await response.json()
+      console.log('Données cycle combiné:', data)
+
       circuitData.value = data.circuit_cycle_combine
     } catch (error) {
       console.error('Erreur lors du chargement des données:', error)
