@@ -3,13 +3,12 @@
         <header class="bg-white shadow-sm p-4 sticky fixed top-0 z-50 transition-all duration-200 dss">
             <div class="container mx-auto flex justify-between items-center logowrapper">
                 <div class="columns">
-                    <div class="column is-4 rihanna">
+                    <div class="column is-4-desktop is-4-mobile rihanna">
                         <img src="/images/logo.webp" alt="Logo" class="h-10" style="height:80px;" />
                     </div>
-                    <div class="column is-8 cassie is-flex is-justify-content-end p-0">
+                    <div class="column is-8-desktop is-8-mobile cassie is-flex is-justify-content-end p-0">
                         <div class="insidelogowrapper">
                             <h5 class="text-2xl font-bold text-blue-600">Circuit des turbines à Gaz</h5>
-
                         </div>
                     </div>
                 </div>
@@ -18,8 +17,8 @@
 
         <GameInstructions @start-game="startGame" />
         <div class="game-container container">
-            <main class="columns">
-                <div class="column is-4">
+            <main class="columns is-mobile">
+                <div class="column is-4-desktop is-4-mobile">
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">Composants</h2>
@@ -28,7 +27,9 @@
                             <div class="components-list">
                                 <div v-for="item in shuffledElements" :key="item.nom" class="draggable-component"
                                     :class="{ 'used': isItemUsed(item), 'pointer-events-none opacity-50': isGameOver }"
-                                    :draggable="!isItemUsed(item) && !isGameOver" @dragstart="startDrag($event, item)">
+                                    :draggable="!isItemUsed(item) && !isGameOver" @dragstart="startDrag($event, item)"
+                                    @touchstart="touchStart($event, item)" @touchmove="touchMove($event)"
+                                    @touchend="touchEnd($event, item)">
                                     <div class="is-flex flex-wrap relative shyne">
                                         <div class="component-image-container is-flex flex-wrap relative">
                                             <div v-if="imageLoading[item.nom]"
@@ -48,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="column is-5">
+                <div class="column is-5-desktop is-8-mobile">
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">Zone de construction</h2>
@@ -57,18 +58,17 @@
                             <div class="drop-zones">
                                 <div v-for="(zone, index) in safeCircuitData.elements" :key="index" class="drop-zone"
                                     :class="{ 'pointer-events-none opacity-50': isGameOver }" @dragover.prevent
-                                    @drop="onDrop($event, index)">
+                                    @drop="onDrop($event, index)" @touchenter.prevent
+                                    @touchend="onTouchDrop($event, index)">
                                     <div v-if="placedItems[index]"
                                         class="placed-item bg-[#f3f6fd] rounded-lg transition-all hover:shadow-md w-full h-full flex flex-col items-center justify-center shynepo">
                                         <img :src="placedItems[index].image" :alt="placedItems[index].nom">
                                         <div class="obama">
-
                                             <h3 class="font-medium text-[#1a237e] mt-2">{{ placedItems[index].nom }}
                                             </h3>
                                             <p>{{ placedItems[index].fonction }}</p>
                                         </div>
                                     </div>
-
                                     <div v-else class="empty-zone">
                                         <span class="text-gray-400">Position {{ index + 1 }}</span>
                                     </div>
@@ -78,17 +78,12 @@
                     </div>
                 </div>
 
-                <div class="column is-3">
+                <div class="column is-3-desktop is-12-mobile">
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">Information</h2>
                         </div>
                         <div class="card-content">
-                            <!-- <div v-if="selectedItem" class="info-panel">
-                                <h3 class="font-medium text-blue-800">{{ selectedItem.nom }}</h3>
-                                <p class="text-sm text-blue-600 mt-1">{{ selectedItem.fonction }}</p>
-                            </div> -->
-
                             <div class="flex items-center gap-4">
                                 <div class="flex items-center gap-2">
                                     <p class="font-semibold" :class="{
@@ -98,7 +93,7 @@
                                     }">
                                         votre score: {{ score }}/{{ safeCircuitData.elements.length }}
                                     </p>
-                                    <div class="chronograph z-50">
+                                    <div class="chronograph z-50" v-if="timerStarted">
                                         <svg class="progress-ring" width="60" height="60">
                                             <circle class="progress-ring__circle" :style="{
                                                 strokeDashoffset: `${calculateOffset()}px`,
@@ -106,25 +101,19 @@
                                             }" stroke-width="4" fill="transparent" r="26" cx="30" cy="30" />
                                         </svg>
                                         <div class="chronograph-text" :class="{ 'text-red-600': timeLeft <= 10 }">
-                                            {{ timeLeft }} <p>secondes</p>
+                                            {{ timeLeft }}
                                         </div>
                                     </div>
-                                    <p class="font-semibold" :class="{ 'score-text red': timeLeft <= 10 }">
-                                        Temps restant: {{ timeLeft }}s
-                                    </p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </main>
         </div>
 
-
-        <div v-if="isGameOver"
-            class="gameOver fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+        <div v-if="isGameOver" class="gameOver">
+            <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 popup-content">
                 <h2 class="text-2xl font-bold mb-4">Temps écoulé !</h2>
                 <p class="text-lg mb-2">Votre score final est : {{ score }}/{{ safeCircuitData.elements.length }}</p>
                 <p class="text-md text-blue-600 mb-4">{{ getFinalEvaluation }}</p>
@@ -152,15 +141,13 @@ const isGameOver = ref(false)
 const timer = ref(null)
 const imageLoading = ref({})
 const timerStarted = ref(false)
-const startGame = () => {
-    timerStarted.value = true
-    startTimer()
-}
+
 const calculateOffset = () => {
-    const circumference = 2 * Math.PI * 26;
-    const progress = (timeLeft.value / 60) * circumference;
-    return circumference - progress;
+    const circumference = 2 * Math.PI * 26
+    const progress = (timeLeft.value / 60) * circumference
+    return circumference - progress
 }
+
 const defaultCircuitData = {
     elements: []
 }
@@ -181,6 +168,11 @@ const getFinalEvaluation = computed(() => {
     return "Continuez à vous entraîner !"
 })
 
+const startGame = () => {
+    timerStarted.value = true
+    startTimer()
+}
+
 const startTimer = () => {
     timer.value = setInterval(() => {
         if (timeLeft.value > 0) {
@@ -193,9 +185,7 @@ const startTimer = () => {
 }
 
 const isItemUsed = (item) => {
-    // return Object.values(placedItems.value).some(placedItem => placedItem.nom === item.nom)
-    return false // Désactive la vérification, permettant de réutiliser les composants
-
+    return false
 }
 
 const startDrag = (event, item) => {
@@ -205,6 +195,40 @@ const startDrag = (event, item) => {
         event.dataTransfer.setData('itemIndex', item.position)
         selectedItem.value = item
     }
+}
+
+const touchStart = (event, item) => {
+    if (isGameOver.value) return
+    event.preventDefault()
+    selectedItem.value = item
+    const element = event.target
+    element.style.opacity = '0.5'
+}
+
+const touchMove = (event) => {
+    if (!selectedItem.value) return
+    event.preventDefault()
+    const touch = event.touches[0]
+    const element = event.target
+    element.style.position = 'absolute'
+    element.style.left = `${touch.pageX - element.offsetWidth / 2}px`
+    element.style.top = `${touch.pageY - element.offsetHeight / 2}px`
+}
+
+const touchEnd = (event, item) => {
+    if (!selectedItem.value) return
+    event.preventDefault()
+    const element = event.target
+    element.style.position = 'static'
+    element.style.opacity = '1'
+}
+
+const onTouchDrop = (event, index) => {
+    if (!selectedItem.value || isGameOver.value) return
+    event.preventDefault()
+    placedItems.value[index] = selectedItem.value
+    checkScore()
+    selectedItem.value = null
 }
 
 const onDrop = (event, index) => {
@@ -231,7 +255,7 @@ const checkScore = () => {
             title: 'Correct !',
             text: 'Bien joué !',
             icon: 'success',
-            timer: 1500,
+            timer: 800,
             showConfirmButton: false,
             toast: true,
             customClass: {
@@ -243,7 +267,7 @@ const checkScore = () => {
             title: 'Attention',
             text: 'Mauvais ordre, essayez encore !',
             icon: 'error',
-            timer: 1500,
+            timer: 800,
             showConfirmButton: false,
             toast: true,
             customClass: {
@@ -257,7 +281,7 @@ const checkScore = () => {
             title: 'Félicitations !',
             text: 'Vous avez complété le circuit parfaitement !',
             icon: 'success',
-            timer: 1500,
+            timer: 1200,
             showConfirmButton: false,
             toast: true,
             customClass: {
@@ -268,7 +292,6 @@ const checkScore = () => {
 }
 
 onMounted(() => {
-    //startTimer()
     safeCircuitData.value.elements.forEach(item => {
         imageLoading.value[item.nom] = true
     })
@@ -279,5 +302,6 @@ onBeforeUnmount(() => {
 });
 </script>
 
-
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+/* Styles existants */
+</style>
