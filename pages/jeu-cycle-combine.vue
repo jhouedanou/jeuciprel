@@ -138,7 +138,7 @@ import { useCircuitCycleCombine } from '~/composables/useCircuitCycleCombine'
 import GameInstructions from '~/components/games/GameInstructions.vue'
 
 const { $swal } = useNuxtApp()
-const { circuitData } = useCircuitTurbinesGaz()
+const { circuitData } = useCircuitCycleCombine()
 const placedItems = ref({})
 const selectedItem = ref(null)
 const score = ref(0)
