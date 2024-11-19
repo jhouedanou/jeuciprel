@@ -7,13 +7,9 @@
             <div class="instructions">
                 <div class="instruction-step">
                     <i class="fas fa-arrows-alt"></i>
-                    <p>Faites glisser les composants depuis la zone de gauche</p>
+                    <p>Faites glisser les composants dans le bon ordre afin de produire de l'électricité</p>
                 </div>
 
-                <div class="instruction-step">
-                    <i class="fas fa-sort-numeric-down"></i>
-                    <p>Placez-les dans l'ordre correct au centre</p>
-                </div>
             </div>
 
             <!-- Instructions Mobile -->
