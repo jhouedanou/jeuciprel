@@ -1,22 +1,32 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
-  devtools: { enabled:false },
-
+  devtools: { enabled: false },
   typescript: {
     strict: false
   },
-modules: [
-  '@nuxt/image',
-],
-plugins: [
-  '~/plugins/sweetalert2.js'
-],
-css: [
-  '@sweetalert2/theme-minimal/minimal.css',
-  '@/assets/styles/styles.scss'
-
-],
+  modules: [
+    '@nuxt/image',    
+    '@pinia/nuxt',
+    '@nuxtjs/tailwindcss'
+  ],
+  pinia: {
+    autoImports: ['defineStore']
+  },
+  plugins: [
+    '~/plugins/sweetalert2.js'
+  ],
+  css: [
+    '@sweetalert2/theme-minimal/minimal.css',
+    '@/assets/styles/styles.scss',
+    '@/assets/css/main.css',
+    '~/assets/css/main.css'
+  ],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   image: {
     quality: 80,
     format: ['webp', 'jpg']
@@ -25,18 +35,16 @@ css: [
   nitro: {
     preset: 'vercel',
     prerender: {
-      // crawlLinks: true,
       failOnError: false
     },
   }, 
   buildModules: [
     '@nuxtjs/pwa',
   ],
-
   pwa: {
     manifest: {
-      name: 'CiprelPuzzle',
-      short_name: 'CiprelPuzzle',
+      name: 'CIPREL - Questionnaire RH',
+      short_name: 'CIPREL - Questionnaire RH',
       lang: 'fr',
       display: 'standalone',
       theme_color: '#ec2f19',
@@ -49,19 +57,14 @@ css: [
       fileName: 'app-icon.png',
     },
   },
-
-  css: [
-    '@/assets/styles/styles.scss',
-    'bulma/css/bulma.min.css',
-    'bootstrap/dist/css/bootstrap.min.css'
-  ],
   vite: {
     define: {
       'process.env.DEBUG': false,
     },
   },
   head: {
-    title:"DINOR APP - Calculateur de calories",  meta: [
+    title: 'CIPREL - Questionnaire RH',
+    meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
@@ -99,7 +102,5 @@ css: [
       { name: 'msapplication-TileImage', content: '/images/ms-icon-144x144.png' },
       { name: 'theme-color', content: '#ffffff' },
     ],
-  },
-
-
+  }
 })
