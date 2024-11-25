@@ -116,7 +116,7 @@ body,
     // background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
     min-height: 100vh;
 
-    background             : url(images/Groupe-851.png.webp) no-repeat center center fixed;
+    background             : url(images/ibg.webp) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size   : cover;
     -o-background-size     : cover;
@@ -362,15 +362,20 @@ body,
     }
 
     .score-perfect {
-        background: #4CAF50
+        background-color: #4CAF50;
+
     }
 
     .score-decrease {
-        background: #FF5252
+        background-color: #FF5252;
+        overflow        : auto;
+
+
     }
 
     .score-increase {
-        background: #4CAF50
+        background-color: #4CAF50;
+
     }
 }
 
@@ -656,18 +661,6 @@ body {
 
     background-position: 50% 50%;
 
-    h2 {
-        margin-bottom: 0em !important;
-        position     : absolute;
-        bottom       : 0em;
-        color        : white;
-        font-size    : 1em !important;
-        background   : linear-gradient(to top, #000, transparent);
-        width        : 100%;
-        text-shadow  : 0 1px 2px rgba(0, 0, 0, 0.5);
-    }
-
-
 }
 
 .didq {
@@ -676,7 +669,7 @@ body {
             padding: 0 !important;
 
             h2 {
-                padding      : 1rem;
+                padding      : 0rem;
                 margin-bottom: 0;
             }
 
@@ -711,5 +704,26 @@ body {
 .nichiren {
     button {
         background: $primary;
+    }
+}
+
+.makingmoveswithpuff {
+    min-height: 58vh;
+
+    .card-text {
+        min-height: 216px;
+    }
+}
+
+.dude {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    flex-direction : column;
+
+    img {
+
+        height: 240px;
+        width : auto;
     }
 }

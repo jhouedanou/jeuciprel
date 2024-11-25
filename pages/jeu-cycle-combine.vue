@@ -112,6 +112,9 @@
         <div v-if="isGameOver" class="gameOver">
             <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 popup-content">
                 <h2 class="text-2xl font-bold mb-4">Temps écoulé !</h2>
+                <div class="dude">
+                    <img src="/images/dude.webp" alt="Dude" class="dude-image" />
+                </div>
                 <p class="text-lg mb-2">Score final : {{ score }}/{{ safeCircuitData.elements.length }}</p>
                 <p class="text-md text-blue-600 mb-4">{{ getFinalEvaluation }}</p>
 
@@ -188,8 +191,8 @@ const startTimer = () => {
 }
 
 const isItemUsed = (item) => {
-    //  return Object.values(placedItems.value).some(placedItem => placedItem.nom === item.nom)
-    return false
+    return Object.values(placedItems.value).some(placedItem => placedItem.nom === item.nom)
+    // return false
 }
 
 // Gestion du drag & drop
@@ -245,6 +248,13 @@ const checkScore = () => {
         const correctItem = safeCircuitData.value.elements[index]
         return acc + (item.nom === correctItem.nom ? 1 : 0)
     }, 0)
+
+    const allZonesFilled = Object.keys(placedItems.value).length === safeCircuitData.value.elements.length
+
+    if (allZonesFilled) {
+        clearInterval(timer.value)
+        isGameOver.value = true
+    }
 
     if (score.value > previousScore) {
         $swal.fire({

@@ -22,7 +22,7 @@ const closePopup = () => {
                         <img src="/images/dude.webp" alt="Dude" class="dude-image" />
                     </div>
                     <div class="tex">
-                        <p>Bienvenue !</p>
+
                         <p>Dans ce jeu interactif, plongez au cœur du processus de production d'électricité en
                             assemblant
                             les composants clés d'une centrale électrique.</p>
@@ -39,7 +39,6 @@ const closePopup = () => {
                             hauteur ?</p>
                     </div>
                 </div>
-
                 <button @click="closePopup" class="close-button">Commencer</button>
             </div>
         </div>
@@ -53,7 +52,7 @@ const closePopup = () => {
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 didq">
                 <nuxt-link to="/jeu-turbines" class="text-decoration-none">
-                    <div class="makingmoveswithpuff card hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="card hover:transform hover:scale-105 transition-all duration-300">
                         <div class="p-6 text-center">
                             <div class="johney"
                                 style="background-image: url('images/circuit_turbines_gaz/thumb.webp'); background-size: cover;">
@@ -72,7 +71,7 @@ const closePopup = () => {
                 </nuxt-link>
 
                 <nuxt-link to="/jeu-cycle-combine" class="text-decoration-none">
-                    <div class="makingmoveswithpuff card hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="card hover:transform hover:scale-105 transition-all duration-300">
                         <div class="p-6 text-center">
                             <div class="johney"
                                 style="background-image: url('images/circuit_cycle_combine/thumb.webp'); background-size: cover;">
@@ -115,79 +114,5 @@ img {
 .page-enter-from,
 .page-leave-to {
     opacity: 0;
-}
-
-
-
-.johney {
-    position: relative;
-    padding: 2rem;
-}
-
-.johney::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-.johney h2 {
-    position: relative;
-    background-color: #ff6b00;
-    /* Orange pour les titres */
-    z-index: 1;
-    color: white;
-}
-
-/* Styles pour le popup */
-.popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.popup-content {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    max-width: 600px;
-    width: 90%;
-    text-align: center;
-}
-
-.popup-title {
-    font-size: 2rem;
-    color: #ff6b00;
-    margin-bottom: 1.5rem;
-}
-
-.popup-text {
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.close-button {
-    background-color: #ff6b00;
-    color: white;
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: background-color 0.3s;
-}
-
-.close-button:hover {
-    background-color: #e65c00;
 }
 </style>

@@ -2,7 +2,9 @@
     <div v-if="isVisible" class="instruction-overlay">
         <div class="instruction-modal">
             <h2 class="text-center mb-4">Comment jouer ?</h2>
-
+            <div class="dude">
+                <img src="/images/dude.webp" alt="Dude" class="dude-image" />
+            </div>
             <!-- Instructions Desktop -->
             <div class="instructions">
                 <div class="instruction-step">
