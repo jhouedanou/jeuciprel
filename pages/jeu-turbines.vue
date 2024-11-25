@@ -113,11 +113,18 @@
         <div v-if="isGameOver" class="gameOver">
             <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 popup-content">
                 <h2 class="text-2xl font-bold mb-4">Fini !</h2>
+                <img src="/images/logo.webp" alt="">
                 <div class="dude">
                     <img src="/images/11.svg" alt="Dude" class="dude-image" />
                 </div>
                 <p class="text-lg mb-2">Votre score final est : {{ score }}/{{ safeCircuitData.elements.length }}</p>
                 <p class="text-md text-blue-600 mb-4">{{ getFinalEvaluation }}</p>
+                <button @click="$router.go(0)" class="start-button patch">
+                    Rééssayer
+                </button>
+
+
+
 
             </div>
         </div>
@@ -150,6 +157,16 @@ const updateJanoWidth = () => {
         janoDiv.style.width = `${width}px`
     }
 }
+
+const resetGame = () => {
+    placedItems.value = {}
+    score.value = 0
+    timeLeft.value = 60
+    isGameOver.value = false
+    timerStarted.value = false
+    if (timer.value) clearInterval(timer.value)
+}
+
 const calculateOffset = () => {
     const circumference = 2 * Math.PI * 26
     const progress = (timeLeft.value / 60) * circumference

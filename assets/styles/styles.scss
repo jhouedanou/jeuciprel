@@ -727,3 +727,16 @@ body {
         width : auto;
     }
 }
+
+.patch {
+    display      : block !important;
+    width        : 100% !important;
+    padding      : 1rem !important;
+    background   : $primary !important;
+    color        : white !important;
+    border       : none !important;
+    border-radius: 5px !important;
+    font-size    : 1.1rem !important;
+    cursor       : pointer !important;
+    transition   : background 0.3s !important;
+}
