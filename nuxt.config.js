@@ -1,32 +1,22 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: false },
+  devtools: { enabled:false },
+
   typescript: {
     strict: false
   },
-  modules: [
-    '@nuxt/image',    
-    '@pinia/nuxt',
-    '@nuxtjs/tailwindcss'
-  ],
-  pinia: {
-    autoImports: ['defineStore']
-  },
-  plugins: [
-    '~/plugins/sweetalert2.js'
-  ],
-  css: [
-    '@sweetalert2/theme-minimal/minimal.css',
-    '@/assets/styles/styles.scss',
-    '@/assets/css/main.css',
-    '~/assets/css/main.css'
-  ],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
+modules: [
+  '@nuxt/image',
+],
+plugins: [
+  '~/plugins/sweetalert2.js'
+],
+css: [
+  '@sweetalert2/theme-minimal/minimal.css',
+  '@/assets/styles/styles.scss'
+
+],
   image: {
     quality: 80,
     format: ['webp', 'jpg']
@@ -35,16 +25,18 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'vercel',
     prerender: {
+      // crawlLinks: true,
       failOnError: false
     },
   }, 
   buildModules: [
     '@nuxtjs/pwa',
   ],
+
   pwa: {
     manifest: {
-      name: 'CIPREL - Questionnaire RH',
-      short_name: 'CIPREL - Questionnaire RH',
+      name: 'CiprelPuzzle',
+      short_name: 'CiprelPuzzle',
       lang: 'fr',
       display: 'standalone',
       theme_color: '#ec2f19',
@@ -57,14 +49,19 @@ export default defineNuxtConfig({
       fileName: 'app-icon.png',
     },
   },
+
+  css: [
+    '@/assets/styles/styles.scss',
+    'bulma/css/bulma.min.css',
+    'bootstrap/dist/css/bootstrap.min.css'
+  ],
   vite: {
     define: {
       'process.env.DEBUG': false,
     },
   },
   head: {
-    title: 'CIPREL - Questionnaire RH',
-    meta: [
+    title:"DINOR APP - Calculateur de calories",  meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
@@ -102,5 +99,7 @@ export default defineNuxtConfig({
       { name: 'msapplication-TileImage', content: '/images/ms-icon-144x144.png' },
       { name: 'theme-color', content: '#ffffff' },
     ],
-  }
+  },
+
+
 })
