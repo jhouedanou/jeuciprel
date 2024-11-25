@@ -111,7 +111,7 @@
         <!-- Popup de fin de jeu -->
         <div v-if="isGameOver" class="gameOver">
             <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 popup-content">
-                <h2 class="text-2xl font-bold mb-4">Temps écoulé !</h2>
+                <h2 class="text-2xl font-bold mb-4">Fini !</h2>
                 <div class="dude">
                     <img src="/images/dude.webp" alt="Dude" class="dude-image" />
                 </div>
