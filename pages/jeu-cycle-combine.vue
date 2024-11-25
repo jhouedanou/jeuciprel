@@ -113,7 +113,7 @@
             <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 popup-content">
                 <h2 class="text-2xl font-bold mb-4">Fini !</h2>
                 <div class="dude">
-                    <img src="/images/dude.webp" alt="Dude" class="dude-image" />
+                    <img src="/images/11.svg" alt="Dude" class="dude-image" />
                 </div>
                 <p class="text-lg mb-2">Score final : {{ score }}/{{ safeCircuitData.elements.length }}</p>
                 <p class="text-md text-blue-600 mb-4">{{ getFinalEvaluation }}</p>
