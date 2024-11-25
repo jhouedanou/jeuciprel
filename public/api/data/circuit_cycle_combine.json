@@ -1,31 +1,30 @@
 {
     "circuit_cycle_combine": {
-        "objectif": "Récupérer la chaleur des gaz d’échappement pour produire de l’électricité supplémentaire.",
+        "objectif": "Récupérer la chaleur des gaz d'échappement pour produire de l'électricité supplémentaire.",
         "elements": [
             {
-                "nom": "Chaudière de Récupération de Chaleur",
-                "fonction": "Capte la chaleur des gaz d’échappement pour générer de la vapeur.",
+                "nom": "Turbine à Gaz",
+                "fonction": "Fournit les gaz d'échappement à la chaudière de récupération.",
+                "position": "Premier",
                 "image": "/images/circuit_cycle_combine/1.webp"
             },
             {
-                "nom": "Turbine à Vapeur",
-                "fonction": "La vapeur générée fait tourner cette turbine pour produire de l’énergie mécanique supplémentaire.",
+                "nom": "Chaudière de Récupération de Chaleur",
+                "fonction": "Capte la chaleur des gaz d'échappement pour générer de la vapeur.",
+                "position": "Après la turbine à Gaz",
                 "image": "/images/circuit_cycle_combine/2.webp"
             },
             {
+                "nom": "Turbine à Vapeur",
+                "fonction": "La vapeur générée fait tourner cette turbine pour produire de l'énergie mécanique supplémentaire.",
+                "position": "Après la chaudière de récupération",
+                "image": "/images/circuit_cycle_combine/3.webp"
+            },
+            {
                 "nom": "Générateur",
-                "fonction": "Convertit l’énergie mécanique de la turbine à vapeur en électricité.",
-                "image": "/images/circuit_cycle_combine/3.png"
-            },
-            {
-                "nom": "Condenseur",
-                "fonction": "Condense la vapeur résiduelle après son passage dans la turbine, pour récupérer l’eau.",
+                "fonction": "Convertit l'énergie mécanique de la turbine à vapeur en électricité.",
+                "position": "Après la turbine à vapeur",
                 "image": "/images/circuit_cycle_combine/4.webp"
-            },
-            {
-                "nom": "Pompe d’Alimentation en Eau",
-                "fonction": "Ramène l’eau condensée vers la chaudière de récupération pour créer un cycle fermé.",
-                "image": "/images/circuit_cycle_combine/5.webp"
             }
         ]
     }

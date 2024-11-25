@@ -110,16 +110,12 @@
 
             </main>
         </div>
-
         <div v-if="isGameOver" class="gameOver">
             <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 popup-content">
                 <h2 class="text-2xl font-bold mb-4">Temps écoulé !</h2>
                 <p class="text-lg mb-2">Votre score final est : {{ score }}/{{ safeCircuitData.elements.length }}</p>
                 <p class="text-md text-blue-600 mb-4">{{ getFinalEvaluation }}</p>
-                <button @click="$router.push('/')"
-                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    Retour à l'accueil
-                </button>
+
             </div>
         </div>
 

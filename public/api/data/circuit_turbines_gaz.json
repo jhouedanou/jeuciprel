@@ -15,28 +15,16 @@
                 "image": "/images/circuit_turbines_gaz/2.webp"
             },
             {
-                "nom": "Combustion",
-                "fonction": "Permet de produire les gaz chauds pour faire tourner la turbine.",
-                "position": "Dans la chambre de combustion",
-                "image": "/images/circuit_turbines_gaz/3.webp"
-            },
-            {
                 "nom": "Turbine à gaz",
                 "fonction": "La combustion du gaz fait tourner les ailettes de la turbine, ce qui génère de l'énergie mécanique.",
                 "position": "Après la chambre de combustion",
-                "image": "/images/circuit_turbines_gaz/4.webp"
+                "image": "/images/circuit_turbines_gaz/3.webp"
             },
             {
                 "nom": "Générateur",
                 "fonction": "Convertit l'énergie mécanique produite par la turbine en électricité.",
                 "position": "Après la turbine",
-                "image": "/images/circuit_turbines_gaz/5.webp"
-            },
-            {
-                "nom": "Évacuateur des gaz d'échappement",
-                "fonction": "Libère les gaz brûlés dans l'atmosphère ou les envoie vers le cycle combiné pour récupération de chaleur.",
-                "position": "Dernier",
-                "image": "/images/circuit_turbines_gaz/6.webp"
+                "image": "/images/circuit_turbines_gaz/4.webp"
             }
         ]
     }

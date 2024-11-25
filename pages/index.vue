@@ -19,9 +19,12 @@ const pageTransition = {
                 <nuxt-link to="/jeu-turbines" class="text-decoration-none">
                     <div class="card hover:transform hover:scale-105 transition-all duration-300">
                         <div class="p-6 text-center">
-                            <h2 class="text-2xl font-bold text-[#1a237e] mb-4">Turbines à gaz</h2>
-                            <nuxt-img src="images/turbine.webp" format="webp" quality="80"
-                                class="mx-auto mb-6 rounded-lg shadow-lg" alt="Turbine à gaz" />
+                            <div class="johney"
+                                style="background-image: url('images/circuit_turbines_gaz/thumb.webp'); background-size: cover;">
+                                <h2 class="text-2xl font-bold text-[#1a237e] mb-4">Turbines à gaz</h2>
+
+                            </div>
+
                             <p class="card-text">
                                 La centrale thermique dispose d'un parc de six turbines à gaz : trois unités de 33 MW et
                                 trois unités de 111 MW, représentant une capacité totale installée de 432 MW.
@@ -35,9 +38,11 @@ const pageTransition = {
                 <nuxt-link to="/jeu-cycle-combine" class="text-decoration-none">
                     <div class="card hover:transform hover:scale-105 transition-all duration-300">
                         <div class="p-6 text-center">
-                            <h2 class="text-2xl font-bold text-[#1a237e] mb-4">Cycle combiné</h2>
-                            <nuxt-img src="images/cyclecombine.webp" format="webp" quality="80"
-                                class="mx-auto mb-6 rounded-lg shadow-lg" alt="Cycle combiné" />
+                            <div class="johney"
+                                style="background-image: url('images/circuit_cycle_combine/thumb.webp'); background-size: cover;">
+                                <h2 class="text-2xl font-bold text-[#1a237e] mb-4">Cycle combiné</h2>
+                            </div>
+
                             <p class="card-text">Notre centrale thermique à cycle combiné permet d’éviter le rejet de
                                 près de 500 000 tonnes de CO2 dans l’atmosphère de la Côte d’Ivoire.</p>
                             <button class="btn btn-primary">Sélectionner</button>
