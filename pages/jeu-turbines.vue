@@ -115,7 +115,7 @@
                 <h2 class="text-2xl font-bold mb-4">Fini !</h2>
                 <img src="/images/logo.webp" alt="">
                 <div class="dude">
-                    <img src="/images/11.svg" alt="Dude" class="dude-image" />
+                    <img src="/images/circuit_turbines_gaz/thumb.webp" alt="Dude" class="dude-image" />
                 </div>
                 <p class="text-lg mb-2">Votre score final est : {{ score }}/{{ safeCircuitData.elements.length }}</p>
                 <p class="text-md text-blue-600 mb-4">{{ getFinalEvaluation }}</p>
