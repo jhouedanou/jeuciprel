@@ -16,7 +16,7 @@ const closePopup = () => {
         <div v-if="showPopup" class="popup-overlay">
             <div class="popup-content">
                 <img src="/images/logo.webp" alt="Logo" class="popup-image" />
-                <h2 class="popup-title">Jeu Lego Electrique</h2>
+                <h2 class="popup-title">Brikelec</h2>
                 <div class="popup-text">
                     <div class="dude">
                         <img src="/images/dude.webp" alt="Dude" class="dude-image" />
