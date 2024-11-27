@@ -432,11 +432,13 @@ body,
 .score-text.orange {
     color: #f97316;
     /* orange-500 */
+
 }
 
 .score-text.green {
     color: #16a34a;
     /* green-600 */
+
 }
 
 .countdown-text {
@@ -739,4 +741,8 @@ body {
     font-size    : 1.1rem !important;
     cursor       : pointer !important;
     transition   : background 0.3s !important;
+}
+
+.swal2-container {
+    display: none !important;
 }
