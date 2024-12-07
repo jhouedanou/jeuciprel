@@ -111,16 +111,29 @@
         <!-- Popup de fin de jeu -->
         <div v-if="isGameOver" class="gameOver">
             <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 popup-content">
-                <h2 class="text-2xl font-bold mb-4">Fini !</h2>
+                <h2 class="text-2xl font-bold mb-4">
+                    {{ score >= 4 ? 'Bravo !' : 'Plus de chance la prochaine fois !' }}
+                </h2>
                 <img src="/images/logo.webp" alt="">
                 <div class="dude">
                     <img src="/images/circuit_cycle_combine/thumb.webp" alt="Dude" class="dude-image" />
                 </div>
                 <p class="text-lg mb-2">Score final : {{ score }}/{{ safeCircuitData.elements.length }}</p>
                 <p class="text-md text-blue-600 mb-4">{{ getFinalEvaluation }}</p>
-                <button @click="$router.go(0)" class="start-button patch">
-                    Rééssayer
-                </button>
+                <div>
+                    <div v-if="score >= 4">
+                        <!-- <button class="start-button patch" disabled>
+                            Félicitations
+                        </button> -->
+                    </div>
+                    <div v-else>
+                        <button @click="$router.go(0)" class="start-button patch">
+                            Réessayer
+                        </button>
+                    </div>
+                </div>
+
+
 
             </div>
         </div>
@@ -172,8 +185,8 @@ const shuffledElements = computed(() => {
 const getFinalEvaluation = computed(() => {
     const percentage = (score.value / safeCircuitData.value.elements.length) * 100
     if (percentage === 100) return "Excellent ! Parfaite maîtrise du circuit !"
-    if (percentage >= 75) return "Très bien ! Presque parfait !"
-    if (percentage >= 50) return "Bien ! Continuez vos efforts !"
+    if (percentage >= 75) return "Plus de chance la prochaine fois !"
+    if (percentage >= 50) return "Echec !"
     return "Continuez à vous entraîner !"
 })
 
@@ -265,7 +278,7 @@ const checkScore = () => {
             title: 'Correct !',
             text: 'Bien joué !',
             icon: 'success',
-            timer: 2000,
+            timer: 0,
             showConfirmButton: false,
             toast: true,
             customClass: {
@@ -277,7 +290,7 @@ const checkScore = () => {
             title: 'Attention',
             text: 'Mauvais ordre, essayez encore !',
             icon: 'error',
-            timer: 2000,
+            timer: 0,
             showConfirmButton: false,
             toast: true,
             customClass: {
@@ -291,7 +304,7 @@ const checkScore = () => {
             title: 'Félicitations !',
             text: 'Vous avez complété le circuit parfaitement !',
             icon: 'success',
-            timer: 2000,
+            timer: 0,
             showConfirmButton: false,
             toast: true,
             customClass: {
